@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Привет, это мое первое приложение с спринг бут</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Поиск по магазину ДНС</title>
 </head>
 <body>
 <h1>Привет,Ю это стартовая страница</h1>
-<h2 th:text = "${text}"></h2>
+<form action="#"  th:action="@{/startPage}" th:object="${user}" method="post" >
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+    <p>Email: <input type="text" th:field="*{email}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
 </body>
 </html>

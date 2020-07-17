@@ -4,7 +4,7 @@ import com.lom.MonitoringMasrketDNS.model.User;
 
 import java.util.List;
 
-public interface UsersDao {
+public interface UserDao {
     public void addUser(User user);
 
     public void updateUser(User user);
