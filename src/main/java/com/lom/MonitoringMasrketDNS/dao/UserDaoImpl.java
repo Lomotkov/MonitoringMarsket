@@ -57,9 +57,23 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @SuppressWarnings("unckecked")
+    public User getUserByEmail(String email) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<User>  findedUsers =  session.createQuery("from User where email = " + "\'" + email + "\'").list();
+        User findedUser;
+        if(findedUsers.size()>0) {
+            findedUser = findedUsers.get(0);
+            logger.info("User  : " + findedUser.getName() + "ID = " + findedUser.getId());
+            return findedUser;
+        }
+        return null;
+    }
+
+    @Override
+    @SuppressWarnings("unckecked")
     public List<User> getAllUsers() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<User> findedUser = session.createQuery("from USER").list();
+        List<User> findedUser = session.createQuery("from User").list();
         for (User user : findedUser) {
             logger.info("User name : " + user);
         }

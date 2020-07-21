@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Поиск по магазину ДНС</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgba(71, 65, 90, 0.31);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        /* Full-width input fields */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Overwrite default styles of hr */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* Set a style for the submit button */
+        .registerbtn {
+            background-color: #37bd35;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .registerbtn:hover {
+            background-color: #378737;
+        }
+        .container{
+            background-color: rgba(71, 65, 90, 0.31);
+            width: 400px;
+            min-height: 300px;
+            padding: 5px;
+            justify-content: center;
+            align-items: center;
+
+            /* position the div in center */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Add a blue text color to links */
+        a {
+            color: dodgerblue;
+        }
+
+        /* Set a grey background color and center the text of the "sign in" section */
+        .signin {
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onload='document.regForm.passField.focus()'>
+<!--<h1>Мониторинг товаров интернет магазина DNS</h1>-->
+<div class="container">
+    <form action="#"  th:action="@{/registration}" th:object="${user}" method="post" name="regForm" >
+        <h2>Регистрация</h2>
+        <p>ФИО: <input type="text" th:field="*{name}" /></p>
+        <p>Email: <input type="text" th:field="*{email}" /></p>
+        <p>Пароль: <input type="password" th:field="*{password}" name="passField" /></p>
+        <p>Повторите пароль: <input type="password"/></p>
+        <p><input type="submit" class="registerbtn" value="Зарегистрироваться" onclick="CheckPassword(document.regForm.passField)" /></p>
+    </form>
+    <form action="/login" method="get">
+        <input type="submit" value="У меня уже есть аккаунт!"
+               name="Submit" class="registerbtn" />
+    </form>
+</div>
+<script src="../js/passwordValidation.js"></script>
+</body>
+</html>
