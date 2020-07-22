@@ -75,15 +75,16 @@
             background-color: #f1f1f1;
             text-align: center;
         }
+
     </style>
 </head>
 <body>
 <!--<h1>Мониторинг товаров интернет магазина DNS</h1>-->
 <div class="container">
-    <form action="#"  th:action="@{/login}" th:object="${user}" method="post" >
+    <form action="#"  th:action="@{/links}" th:object="${user}" method="post" >
         <h2>Вход</h2>
-        <p>Email: <input type="text" th:field="*{email}" /></p>
-        <p>Пароль: <input type="password" th:field="*{password}" /></p>
+        <p>Email: <input type="text" th:field="*{email}" required /></p>
+        <p>Пароль: <input type="password" th:field="*{password}" required/></p>
         <p><input type="submit" class="registerbtn" value="Вход" /> </p>
     </form>
     <form action="/registration" method="get">

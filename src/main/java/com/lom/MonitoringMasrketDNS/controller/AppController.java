@@ -23,11 +23,12 @@ public class AppController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("user") User user) {
-        userService.getAllUsers();
-        if(userService.getUserByEmail(user.getEmail()) == null) {
+    public String registrationAdd(@ModelAttribute("user") User user) {
+        if (userService.getUserByEmail(user.getEmail()) == null) {
             System.out.println("User added");
             userService.addUser(user);
+        } else {
+            System.out.println("User not added");
         }
         return "registration";
     }
@@ -40,10 +41,14 @@ public class AppController {
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/links", method = RequestMethod.POST)
     public String login(@ModelAttribute("user") User user) {
-//        userService.addUser(user);
-        return "login";
+        User userToLogin = userService.getUserByEmail(user.getEmail());
+        if (userToLogin != null && userToLogin.getPassword().equals(user.getPassword())) {
+            return "links";
+        } else {
+            return "login";
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
