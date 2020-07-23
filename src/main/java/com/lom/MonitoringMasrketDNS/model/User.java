@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ID_seq")
-    @SequenceGenerator(name="USER_ID_seq", sequenceName="USER_ID_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "NAME")
     private String name;
@@ -16,6 +15,8 @@ public class User {
     private String email;
     @Column(name = "PASSWORD")
     private String password;
+    @Column(name = "ROLE")
+    private String role;
 
     public long getId() {
         return id;
@@ -49,6 +50,14 @@ public class User {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -56,6 +65,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

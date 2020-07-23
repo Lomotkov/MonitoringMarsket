@@ -1,21 +1,34 @@
 package com.lom.MonitoringMasrketDNS.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Embeddable
 @Table(name = "UserNeeds", schema = "public")
 public class UsersNeeds {
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "USER_ID")
     private long userId;
-    @Column(name = "USER_NEED_LINK")
-    private String userNeedLink;
     @Column(name = "USER_NEED_KEY")
     private String productKey;
     @Column(name = "NEED_PRICE")
     private int needPrice;
+
+    public UsersNeeds(long userId, String productKey, int needPrice) {
+        this.userId = userId;
+        this.productKey = productKey;
+        this.needPrice = needPrice;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getUserId() {
         return userId;
@@ -23,14 +36,6 @@ public class UsersNeeds {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public String getUserNeedLink() {
-        return userNeedLink;
-    }
-
-    public void setUserNeedLink(String userNeedLink) {
-        this.userNeedLink = userNeedLink;
     }
 
     public String getProductKey() {
@@ -52,8 +57,8 @@ public class UsersNeeds {
     @Override
     public String toString() {
         return "UsersNeeds{" +
-                "userId=" + userId +
-                ", userNeedLink='" + userNeedLink + '\'' +
+                "id=" + id +
+                ", userId=" + userId +
                 ", productKey='" + productKey + '\'' +
                 ", needPrice=" + needPrice +
                 '}';
