@@ -112,7 +112,7 @@
 
 <!--<h1>Мониторинг товаров интернет магазина DNS</h1>-->
 <div class="container">
-    <form action="#"  th:action="@{/registration}" th:object="${user}" method="post" name="regForm" >
+    <form action="#"  th:action="@{/registration/addUser}" th:object="${user}" method="post" name="regForm" >
         <h2>Регистрация</h2>
         <p>ФИО: <input type="text" th:field="*{name}" required/></p>
         <p>Email: <input type="text" th:field="*{email}" required/></p>

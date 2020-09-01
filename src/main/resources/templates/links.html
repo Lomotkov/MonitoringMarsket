@@ -75,9 +75,9 @@
     </th:block>
 </table>
 <div class="container">
-    <form action="#"  th:action="@{/links/add}" th:object="${userNeedAdd}" method="post" >
-        <p>Ссылка: <input type="text" th:field="*{link}" required /></p>
-        <p>Нужная цена: <input type="text" th:field="*{needPrice}" required/></p>
+    <form th:action="@{/links/addLink}"  method="post" >
+        <p>Ссылка: <input type="text" th:name="userLink" required /></p>
+        <p>Нужная цена: <input type="text" required/></p>
         <p><input type="submit" class="registerbtn" value="Добавить" /> </p>
     </form>
 </div>

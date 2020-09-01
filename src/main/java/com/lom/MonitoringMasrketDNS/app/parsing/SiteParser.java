@@ -1,4 +1,4 @@
-package com.lom.MonitoringMasrketDNS.parsing;
+package com.lom.MonitoringMasrketDNS.app.parsing;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

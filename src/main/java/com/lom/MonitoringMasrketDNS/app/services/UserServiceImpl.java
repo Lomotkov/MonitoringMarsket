@@ -1,9 +1,8 @@
-package com.lom.MonitoringMasrketDNS.service;
+package com.lom.MonitoringMasrketDNS.app.services;
 
 import com.lom.MonitoringMasrketDNS.dao.UserDao;
 import com.lom.MonitoringMasrketDNS.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

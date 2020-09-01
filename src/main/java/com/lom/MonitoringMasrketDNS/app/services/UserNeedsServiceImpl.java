@@ -1,4 +1,4 @@
-package com.lom.MonitoringMasrketDNS.service;
+package com.lom.MonitoringMasrketDNS.app.services;
 
 import com.lom.MonitoringMasrketDNS.dao.UserNeedsDao;
 import com.lom.MonitoringMasrketDNS.model.UserNeeds;
