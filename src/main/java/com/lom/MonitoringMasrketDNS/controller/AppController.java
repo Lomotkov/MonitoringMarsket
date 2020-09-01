@@ -1,9 +1,12 @@
 package com.lom.MonitoringMasrketDNS.controller;
 
-import com.lom.MonitoringMasrketDNS.model.Product;
 import com.lom.MonitoringMasrketDNS.model.User;
+import com.lom.MonitoringMasrketDNS.model.UserNeeds;
+import com.lom.MonitoringMasrketDNS.parsing.LinkParserUtils;
+import com.lom.MonitoringMasrketDNS.parsing.SiteParser;
+import com.lom.MonitoringMasrketDNS.service.ProductService;
+import com.lom.MonitoringMasrketDNS.service.UserNeedsService;
 import com.lom.MonitoringMasrketDNS.service.UserService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,6 +21,10 @@ public class AppController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private UserNeedsService userNeedsService;
 
 
     @RequestMapping("/")
@@ -45,25 +47,38 @@ public class AppController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         User user = new User();
+        userService.getAllUsers();
         model.addAttribute("user", user);
+        SiteParser.getProductPrice("https://www.dns-shop.ru/product/fd6ad37fbbc73330/detskoe-avtokreslo-siger-art-kokon-isofix-koricnevyj/");
         return "registration";
     }
 
 
-    @RequestMapping(value = "/links", method = RequestMethod.POST)
-    public String login(@ModelAttribute("user") User user, Model model) throws ParseException {
+    @RequestMapping(value = "/links", method = {RequestMethod.GET, RequestMethod.POST})
+    public String login(@ModelAttribute("user") User user, Model model) {
         User userToLogin = userService.getUserByEmail(user.getEmail());
         if (userToLogin != null && userToLogin.getPassword().equals(user.getPassword())) {
-            List<Product> products = new ArrayList<Product>();
-            products.add(new Product("234423", "213231", "rewrw", 2341, new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998")));
-            products.add(new Product("ewwewe", "qqqqq", "rewrw", 2341, new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1996")));
-            products.add(new Product("234weqqq423", "eeeee", "rewrw", 2341, new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1994")));
-            model.addAttribute("products", products);
+            List<UserNeeds> userNeeds = userNeedsService.getAllUserNeeds(userToLogin.getId());
+            model.addAttribute("userNeedAdd", new UserNeeds());
+            model.addAttribute("usersNeeds", userNeeds);
+            model.addAttribute("loginUser", userToLogin);
             return "links";
         } else {
             return "login";
         }
     }
+
+    @RequestMapping(value = "/links/add", method = RequestMethod.POST)
+    public String addBook(@ModelAttribute("userNeedAdd") UserNeeds userNeedAdd, @ModelAttribute("loginUser") User loginUser) {
+        if (userNeedAdd.getId() == 0) {
+            userNeedAdd.setUserId(loginUser.getId());
+            userNeedAdd.setProductKey(LinkParserUtils.getKeyFromLink(userNeedAdd.getLink()));
+            userNeedAdd.setProductName("test");
+            this.userNeedsService.addUserNeed(userNeedAdd);
+        }
+        return "redirect:/links";
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {

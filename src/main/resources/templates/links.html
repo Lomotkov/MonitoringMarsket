@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Поиск по магазину ДНС</title>
     <style>
         body {
@@ -35,64 +35,52 @@
             margin-bottom: 25px;
         }
 
-        /* Set a style for the submit button */
-        .registerbtn {
-            background-color: #37bd35;
-            color: white;
-            padding: 16px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
             width: 100%;
-            opacity: 0.9;
         }
 
-        .registerbtn:hover {
-            background-color: #378737;
-        }
-        .container{
-            background-color: rgba(71, 65, 90, 0.31);
-            width: 400px;
-            min-height: 300px;
-            padding: 5px;
-            justify-content: center;
-            align-items: center;
-
-            /* position the div in center */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
 
-        /* Add a blue text color to links */
-        a {
-            color: dodgerblue;
-        }
-
-        /* Set a grey background color and center the text of the "sign in" section */
-        .signin {
-            background-color: #f1f1f1;
-            text-align: center;
-        }
-
-        .table {
-            border: 2px solid #000000;
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
 
     </style>
 </head>
 <body>
-<th:block th:each="product : ${products}">
-    <table class="table">
+<table class="customers">
+    <thead>
     <tr>
-        <td th:text="${product.key}">Key</td>
-        <td th:text="${product.name}">name</td>
-        <td th:text="${product.price}">price</td>
-        <td th:text="${product.link}">Link</td>
-        <td th:text="${product.dateOfSnapshot}">Date of snapshot</td>
+        <td>Key</td>
+        <td>name</td>
+        <td>price</td>
+        <td>Link</td>
     </tr>
-    </table>
-</th:block>
+    </thead>
+    <th:block th:each="userNeed : ${usersNeeds}">
+        <tbody>
+        <tr>
+            <th th:text="${userNeed.productKey}">Key</th>
+            <th th:text="${userNeed.productName}">name</th>
+            <th th:text="${userNeed.needPrice}">price</th>
+            <th th:text="${userNeed.link}">Link</th>
+        </tr>
+        </tbody>
+    </th:block>
+</table>
+<div class="container">
+    <form action="#"  th:action="@{/links/add}" th:object="${userNeedAdd}" method="post" >
+        <p>Ссылка: <input type="text" th:field="*{link}" required /></p>
+        <p>Нужная цена: <input type="text" th:field="*{needPrice}" required/></p>
+        <p><input type="submit" class="registerbtn" value="Добавить" /> </p>
+    </form>
+</div>
+
 </body>
 </html>

@@ -1,10 +1,10 @@
-package com.lom.MonitoringMasrketDNS.dao;
+package com.lom.MonitoringMasrketDNS.service;
 
 import com.lom.MonitoringMasrketDNS.model.UserNeeds;
 
 import java.util.List;
 
-public interface UserNeedsDao {
+public interface UserNeedsService {
     public void addUserNeed(UserNeeds userNeeds);
 
     public void removeUserNeed(long id);

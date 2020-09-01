@@ -3,7 +3,7 @@ package com.lom.MonitoringMasrketDNS.model;
 import javax.persistence.*;
 import java.util.Date;
 
-@Embeddable
+@Entity
 @Table(name = "Product", schema = "public")
 public class Product {
     @Id

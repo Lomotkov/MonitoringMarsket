@@ -2,9 +2,9 @@ package com.lom.MonitoringMasrketDNS.model;
 
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 @Table(name = "UserNeeds", schema = "public")
-public class UsersNeeds {
+public class UserNeeds {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,12 +15,10 @@ public class UsersNeeds {
     private String productKey;
     @Column(name = "NEED_PRICE")
     private int needPrice;
-
-    public UsersNeeds(long userId, String productKey, int needPrice) {
-        this.userId = userId;
-        this.productKey = productKey;
-        this.needPrice = needPrice;
-    }
+    @Column(name = "PRODUCT_NAME")
+    private String productName;
+    @Column(name = "LINK")
+    private String link;
 
     public long getId() {
         return id;
@@ -54,13 +52,31 @@ public class UsersNeeds {
         this.needPrice = needPrice;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     @Override
     public String toString() {
-        return "UsersNeeds{" +
+        return "UserNeeds{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", productKey='" + productKey + '\'' +
                 ", needPrice=" + needPrice +
+                ", productName='" + productName + '\'' +
+                ", link='" + link + '\'' +
                 '}';
     }
 }

@@ -7,10 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Component
+@Repository
 public class ProductDaoImpl implements ProductDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
@@ -30,9 +32,8 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unckecked")
-    public List<Product> getProduct(String productKey) {
+    public Product getProduct(String productKey) {
         Session session = sessionFactory.getCurrentSession();
-        List<Product> product = session.createQuery("FROM Product p WHERE p.KEY = " + productKey).list();
-        return product;
+        return session.load(Product.class, productKey);
     }
 }
